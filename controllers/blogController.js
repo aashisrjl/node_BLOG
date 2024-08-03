@@ -1,8 +1,13 @@
 exports.renderCreateBlog = (req,res)=>{
-    res.render('createBlog')
+    const [error] = req.flash('error')
+    const [success] = req.flash('success')
+    res.render('createBlog',{error,success})
 }
 
 exports.handleCreateBlog = (req,res)=>{
-    console.log(req.body)
-    res.send("submitted ")
+    const {title,subtitle,description} = req.body
+    if(!title || !description || !subtitle){
+        req.flash('error','please fil all field')
+        res.redirect('/createBlog')
+    }
 }

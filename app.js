@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000
+require('./model/index.js')
 
 app.set("view engine","ejs")
 app.use(express.json())
@@ -10,6 +11,14 @@ app.use(express.static("public/"))
 
 const dotenv = require('dotenv')
 dotenv.config();
+const session = require('express-session')
+const flash = require('connect-flash')
+app.use(session({
+    secret: 'nodeBlog',
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(flash());
 
 const blogRoute = require("./routes/blogRoute.js")
 
