@@ -1,0 +1,19 @@
+{
+  "name": "nodejs_blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": " nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dot-env": "^0.0.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
+}
