@@ -7,27 +7,19 @@
     <link rel="stylesheet" href="css/home.css">
 </head>
 <%- include('component/navbar.ejs') %>
+<%- include('component/messageBox') %>
 <body>
     <div class="body">
+      <%  data.map((item)=>{ %>
     <div class="card">
-        <h2 class="card-title">Card Title</h2>
-        <h4 class="card-subtitle">Card Subtitle</h4>
-        <p class="card-description">This is a description of the card. It provides additional details and information.</p>
+        <h2 class="card-title"><%- item.title %></h2>
+        <h4 class="card-subtitle">Subtitle: <%- item.subtitle %></h4>
+        <p class="card-description">Description: <%- item.description.slice(0,30)+ '.......' %></p>
+        <a href="/blogDetail/<%- item.id %>">Read More</a>
     </div>
-
-    <div class="card">
-        <h2 class="card-title">Card Title</h2>
-        <h4 class="card-subtitle">Card Subtitle</h4>
-        <p class="card-description">This is a description of the card. It provides additional details and information.</p>
-    </div>
-
-    <div class="card">
-        <h2 class="card-title">Card Title</h2>
-        <h4 class="card-subtitle">Card Subtitle</h4>
-        <p class="card-description">This is a description of the card. It provides additional details and information.</p>
-    </div>
-</div>
+<% }) %>
+   </div>
     
-    
+<%- include('../services/timeOut') %>
 </body>
 </html>

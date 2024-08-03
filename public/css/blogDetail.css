@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.card {
+    background-color: rgb(197, 156, 156);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 800px;
+    height: 500px;
+    margin: 10px; 
+    margin-left: 25%;
+    
+}
+.card .card-title{
+    text-align: center;
+}
+.button{
+    margin-top: 300px;
+
+}
+.button button:first-child{
+    padding: 10px;
+    background-color: red;
+    cursor: pointer;
+}
+.button button:last-child{
+    padding: 10px;
+    background-color: green;
+    cursor: pointer;
+}
+button a{
+    text-decoration: none;
+    color: black;
+}
+.msg {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    color: black;
+    height: 35px;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 7px;
+}

@@ -20,11 +20,15 @@ app.use(session({
 }))
 app.use(flash());
 
-const blogRoute = require("./routes/blogRoute.js")
+const blogRoute = require("./routes/blogRoute.js");
+const { blogs } = require('./model/index.js');
 
 app.use("",blogRoute)
-app.get("/",(req,res)=>{
-    res.render("home")
+app.get("/",async(req,res)=>{
+    const [error] = req.flash('error')
+    const [success] = req.flash('success')
+    const data = await blogs.findAll()
+    res.render("home",{error,success,data})
 })
 
 app.get("/about",(re,res)=>{

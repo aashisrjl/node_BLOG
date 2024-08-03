@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/blogDetail.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+    <%- include('./component/navbar.ejs') %>
+    <%- include('./component/messageBox.ejs') %>
+
+    <div class="card">
+        <h2 class="card-title"><%- blog.title %></h2>
+        <h4 class="card-subtitle">Subtitle: <%- blog.subtitle %></h4>
+        <p class="card-description">Description: <%- blog.description %></p>
+        <p>Published on : <%- blog.createdAt.toISOString().slice(0,10) %></p>
+        <div class="button">
+            <button><a href='/deleteBlog/<%- blog.id  %>'>Delete</a> <button>
+            <button><a href='/editBlog/<%- blog.id %>' >Update</a> </button>
+        </div>
+    </div>
+    
+    <%- include('../services/timeOut') %>
+</body>
+</html>
