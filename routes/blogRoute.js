@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { renderCreateBlog, handleCreateBlog, renderBlogDetailPage, handleEditBlog, handleDeleteBlog, renderEditPage } = require('../controllers/blogController')
+const { isAuthenticated } = require('../middleware/isAuthenticated')
 const { errorHandler } = require('../services/catchAsyncError')
 
 

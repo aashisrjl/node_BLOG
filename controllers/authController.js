@@ -42,15 +42,16 @@ exports.handleLogin = async(req,res)=>{
     const userMatch = await bcrypt.compare(password,user.password)
 
     if(userMatch){
-        const token = jwt.sign({id:user.id},"blog",{
+        const token = jwt.sign({id:user.id},process.env.SECRETKEY,{
             expiresIn: "30d"
         })
-        res.cookie("blogToken",token);
+        res.cookie("token",token);
         req.flash("success","Login Successfully")
         res.redirect("/")
     }else{
         req.flash("error","Invalid password");
         return res.redirect('/login')
+        
         
     }
     }else{
@@ -58,11 +59,12 @@ exports.handleLogin = async(req,res)=>{
     return res.redirect('/login')
 }
 
+//handle logout
 exports.handleLogout = (req,res)=>{
-    res.clearCookies("blogToken")
-    req.flash("success","Logout Successfully")
-    res.redirect('/login')
-}
+    res.clearCookie("jwtToken");
+    req.flash("success","logout successfully")
+    res.redirect("/login");
+    }
 
 
 
