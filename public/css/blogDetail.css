@@ -2,6 +2,11 @@ body{
     margin: 0;
     padding: 0;
 }
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .card {
     background-color: rgb(197, 156, 156);
     border-radius: 10px;
@@ -10,7 +15,7 @@ body{
     width: 800px;
     height: 500px;
     margin: 10px; 
-    margin-left: 25%;
+  
     
 }
 .card .card-title{

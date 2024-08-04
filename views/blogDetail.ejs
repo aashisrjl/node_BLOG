@@ -10,7 +10,7 @@
 <body>
     <%- include('./component/navbar.ejs') %>
     <%- include('./component/messageBox.ejs') %>
-
+<div class="body">
     <div class="card">
         <h2 class="card-title"><%- blog.title %></h2>
         <h4 class="card-subtitle">Subtitle: <%- blog.subtitle %></h4>
@@ -21,6 +21,7 @@
             <button><a href='/editBlog/<%- blog.id %>' >Update</a> </button>
         </div>
     </div>
+</div>
     
     <%- include('../services/timeOut') %>
 </body>

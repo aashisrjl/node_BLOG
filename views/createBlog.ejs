@@ -10,6 +10,7 @@
 <body>
     <%- include('component/navbar') %>
     <%- include('component/messageBox') %>
+    <div class="body">
     <div class="card">
         <h2 class="card-title">Create Blog</h2>
         <form class="card-form" action="/createBlog" method="post">
@@ -28,6 +29,7 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+</div>
     <%- include('../services/timeOut') %>
 </body>
 </html>
