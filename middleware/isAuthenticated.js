@@ -19,7 +19,6 @@ exports.isAuthenticated = async(req,res,next)=>{
         res.redirect("/login")
     }
     req.userId = data.id
-    req.userName = data.username
     next()
     } catch (error) {
         console.log(error)

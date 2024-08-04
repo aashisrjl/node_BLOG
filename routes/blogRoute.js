@@ -6,7 +6,7 @@ const { errorHandler } = require('../services/catchAsyncError')
 
 
 
-router.route("/createBlog").get(renderCreateBlog).post(handleCreateBlog)
+router.route("/createBlog").get(renderCreateBlog).post(isAuthenticated,errorHandler(handleCreateBlog))
 router.route('/blogDetail/:id').get(renderBlogDetailPage)
 router.route('/deleteBlog/:id').get(handleDeleteBlog)
 router.route('/editBlog/:id').get(renderEditPage).post(handleEditBlog)
