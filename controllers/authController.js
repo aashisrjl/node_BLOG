@@ -1,6 +1,7 @@
 const { users } = require("../model");
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const sendMail = require("../services/sendMail");
 
 exports.renderRegisterPage = (req,res)=>{
     const [error] = req.flash("error");
@@ -19,6 +20,11 @@ exports.handleRegister = async(req,res)=>{
         username,
         email,
         password: await bcrypt.hashSync(password,8)
+    })
+    sendMail({
+        email,
+        subject: "Registered",
+        text: `Dear ${username} are register to the nodeBlog project of aashis Rijal`
     })
     req.flash("success","User Register Successfully")
     res.redirect("/login")
@@ -50,8 +56,7 @@ exports.handleLogin = async(req,res)=>{
         res.redirect("/")
     }else{
         req.flash("error","Invalid password");
-        return res.redirect('/login')
-        
+        return res.redirect('/login') 
         
     }
     }else{
