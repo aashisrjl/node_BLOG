@@ -64,13 +64,11 @@ exports.handleLogin = async(req,res)=>{
     return res.redirect('/login')
 }
 
+}
+
 //handle logout
-exports.handleLogout = (req,res)=>{
-    res.clearCookie("jwtToken");
+exports.handleLogout = async(req,res)=>{
+    res.clearCookie("token");
     req.flash("success","logout successfully")
     res.redirect("/login");
     }
-
-
-
-}
