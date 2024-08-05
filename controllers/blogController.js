@@ -1,4 +1,4 @@
-const { blogs } = require("../model")
+const { blogs, users } = require("../model")
 
 exports.renderCreateBlog = (req,res)=>{
     const [error] = req.flash('error')
@@ -8,6 +8,7 @@ exports.renderCreateBlog = (req,res)=>{
 
 exports.handleCreateBlog = async(req,res)=>{
     const {title,subtitle,description} = req.body
+    const userId = req.userId
     if(!title || !description || !subtitle){
         req.flash('error','please fil all field')
         res.redirect('/createBlog')
@@ -15,8 +16,10 @@ exports.handleCreateBlog = async(req,res)=>{
     const data = await blogs.create({
         title,
         subtitle,
-        description
+        description,
+        userId
     })
+    console.log("userId",userId)
     req.flash('success','blog created successfully')
     res.redirect("/")
 }
@@ -76,4 +79,21 @@ exports.handleEditBlog = async(req,res)=>{
             req.flash('success','Updated Successfully')
             res.redirect(`/blogDetail/${id}`)
 
+}
+
+exports.renderMyBlog = async(req,res)=>{
+    const [error] = req.flash('error')
+    const [success] = req.flash('success')
+    const userId = req.userId
+    const data = await blogs.findAll({
+        where:{
+            userId:userId
+        },
+        include:{
+            model:users,
+        }
+    })
+    const userName = req.userName
+    console.log("username",userName)
+    res.render("myBlog",{error,success,data,userName})
 }

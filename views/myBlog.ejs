@@ -9,6 +9,11 @@
 <%- include('component/navbar.ejs') %>
 <%- include('component/messageBox') %>
 <body>
+    <% if(data.length == 0){ %>
+        <div style="display: flex; justify-content: center; align-items: center;" class="body">
+        <h2><%- userName%> have NO BLOGS</h2>    
+        </div>
+    <% }else{ %>
     <div class="body">
       <%  data.map((item)=>{ %>
     <div class="card">
@@ -20,6 +25,7 @@
     </div>
 <% }) %>
    </div>
+<% } %>
     
 <%- include('../services/timeOut') %>
 <%- include('component/footer') %>

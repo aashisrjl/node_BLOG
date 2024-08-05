@@ -36,8 +36,8 @@ db.blogs = require("./blogModel.js")(sequelize,DataTypes);
 db.users = require("./userModel.js")(sequelize,DataTypes);
 
 // relation between user and blog
-// db.users.hasMany(db.blogs,{foreignKey : 'user_id'});
-// db.blogs.belongsTo(db.users,{foreignKey : 'user_id'});
+db.users.hasMany(db.blogs,{foreignKey : 'userId'});
+db.blogs.belongsTo(db.users,{foreignKey : 'userId'});
 
 
 db.sequelize.sync({ force: false}).then(() => {

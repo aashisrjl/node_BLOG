@@ -23,7 +23,7 @@ app.use(flash());
 
 const blogRoute = require("./routes/blogRoute.js");
 const authRoute = require("./routes/authRoute.js")
-const { blogs } = require('./model/index.js');
+const { blogs, users } = require('./model/index.js');
 
 
 app.use("",blogRoute)
@@ -32,7 +32,14 @@ app.use("",authRoute)
 app.get("/",async(req,res)=>{
     const [error] = req.flash('error')
     const [success] = req.flash('success')
-    const data = await blogs.findAll()
+    const data = await blogs.findAll({
+        include:
+            {
+                model: users
+            }
+        
+    })
+    console.log(data)
     res.render("home",{error,success,data})
 })
 
