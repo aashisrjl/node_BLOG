@@ -52,10 +52,10 @@ exports.handleDeleteBlog = async(req,res)=>{
         id
     }
    })
-   if(data.userId != userId){
-    req.flash('error','you cant delete this ')
-    return res.redirect(`/blogDetail/${id}`)
-   }
+//    if(data.userId != userId){
+//     req.flash('error','you cant delete this ')
+//     return res.redirect(`/blogDetail/${id}`)
+//    }
    const fileName = data.imageUrl
     await blogs.destroy({
         where:{
@@ -90,18 +90,49 @@ exports.renderEditPage = async(req,res)=>{
 exports.handleEditBlog = async(req,res)=>{
             const {id} = req.params
             const {title,subtitle,description} = req.body
+            const userId = req.userId
+            let newFile
+            if(req.file){
+            newFile = req.file.filename
+            console.log(req.file.filename)
+            }else{
+                newFile = ""
+            }
             if(!title || !description || !subtitle){
                 req.flash('error','please fil all field')
                 res.redirect(`/editBlog/${id}`)
                 }
+
+                const [data] = await blogs.findAll({
+                    where:{
+                        id
+                    }
+                })
+                const oldFile = data.imageUrl
+                if(oldFile){
+                    fs.unlink(`storage/${oldFile}`,(err)=>{
+                        if(err){
+                            console.log("error in file delete")
+                        }else{
+                            console.log("file also deleted")
+                        }
+                    })
+                }
+                // if(userId != data.userId){
+                //     req.flash('error','you cant update this')
+                //     return res.redirect(`/editBlog/${id}`)
+                // }
+
             await blogs.update({
                 title:title,
                 subtitle:subtitle,
-                description:description
+                description:description,
+                imageUrl:newFile
                 },
                 {
                     where:{
-                        id:id
+                        id:id,
+                        userId:userId
                         }
             })
             req.flash('success','Updated Successfully')

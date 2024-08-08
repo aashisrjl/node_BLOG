@@ -2,6 +2,8 @@ const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000
 require('./model/index.js')
+const jwt = require('jsonwebtoken');
+const {promisify} = require('util');
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
@@ -21,6 +23,19 @@ app.use(session({
     saveUninitialized: false
 }))
 app.use(flash());
+
+app.use(async(req,res,next)=>{
+    const token = req.cookies.token
+    res.locals.isAuthenticated = token
+    // const decryptedResult = await promisify(jwt.verify)(token,process.env.SECRETKEY)
+    // if(decryptedResult){
+    //     res.locals.isAuthenticated = true
+    // }else{
+    //     res.locals.isAuthenticated = false
+    // }
+
+    next()
+})
 
 const blogRoute = require("./routes/blogRoute.js");
 const authRoute = require("./routes/authRoute.js")
