@@ -1,4 +1,5 @@
-const { blogs, users } = require("../model")
+const { DataTypes, QueryTypes } = require("sequelize")
+const { blogs, users,sequelize } = require("../model")
 const fs = require('fs')
 
 exports.renderCreateBlog = (req,res)=>{
@@ -20,6 +21,24 @@ exports.handleCreateBlog = async(req,res)=>{
         req.flash('error','please fil all field')
         res.redirect('/createBlog')
     }
+
+    // using query to implement multinent architecture and create blog table for separate user
+    await sequelize.query(`CREATE TABLE IF NOT EXISTS blog_${userId} (
+        id int not null primary key auto_increment,
+        title varchar(20),
+        subtitle varchar(30),
+        description varchar(100),
+        imageUrl varchar(100),
+        userId int references users(id))`,{
+        type : QueryTypes.CREATE
+    })
+
+    // inserting data
+    await sequelize.query(`INSERT INTO blog_${userId} (title,subtitle,description,imageUrl,userId) VALUES(?,?,?,?,?)`,{
+        replacements : [title,subtitle,description,image,userId],
+        type: QueryTypes.INSERT
+    })
+    
     const data = await blogs.create({
         title,
         subtitle,
@@ -27,7 +46,7 @@ exports.handleCreateBlog = async(req,res)=>{
         imageUrl: image,
         userId
     })
-    console.log("userId",userId)
+
     req.flash('success','blog created successfully')
     res.redirect("/")
 }
