@@ -11,7 +11,7 @@ const upload = multer({storage:storage})
 
 router.route("/createBlog").get(renderCreateBlog).post(isAuthenticated,upload.single('image'),errorHandler(handleCreateBlog))
 router.route('/blogDetail/:id').get(renderBlogDetailPage)
-router.route('/deleteBlog/:id').get(handleDeleteBlog)
+router.route('/deleteBlog/:id').get(isAuthenticated,handleDeleteBlog)
 router.route('/editBlog/:id').get(renderEditPage).post(handleEditBlog)
 router.route('/myBlog').get(isAuthenticated,errorHandler(renderMyBlog))
 

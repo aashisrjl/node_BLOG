@@ -40,7 +40,7 @@ app.get("/",async(req,res)=>{
             }
         
     })
-    console.log(data)
+    
     res.render("home",{error,success,data})
 })
 

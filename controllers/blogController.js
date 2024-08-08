@@ -1,4 +1,5 @@
 const { blogs, users } = require("../model")
+const fs = require('fs')
 
 exports.renderCreateBlog = (req,res)=>{
     const [error] = req.flash('error')
@@ -45,10 +46,30 @@ exports.renderBlogDetailPage = async(req,res)=>{
 
 exports.handleDeleteBlog = async(req,res)=>{
     const id = req.params.id
+    const userId = req.userId
+   const [data] = await blogs.findAll({
+    where:{
+        id
+    }
+   })
+   if(data.userId != userId){
+    req.flash('error','you cant delete this ')
+    return res.redirect(`/blogDetail/${id}`)
+   }
+   const fileName = data.imageUrl
     await blogs.destroy({
         where:{
-            id:id
+            id:id,
+            userId
             }
+            })
+
+            fs.unlink(`storage/${fileName}`,(err)=>{
+                if(err){
+                    console.log("error in file delete")
+                }else{
+                    console.log("file also deleted")
+                }
             })
             req.flash('success','Deleted Successfully')
             res.redirect('/')
