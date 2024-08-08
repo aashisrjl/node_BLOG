@@ -13,18 +13,18 @@ body{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 800px;
-    height: 500px;
+    height: auto;
     margin: 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   
     
 }
 .card .card-title{
     text-align: center;
 }
-.button{
-    margin-top: 250px;
 
-}
 .button button:first-child{
     padding: 10px;
     background-color: red;

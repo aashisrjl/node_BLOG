@@ -13,6 +13,9 @@
 <div class="body">
     <div class="card">
         <h2 class="card-title"><%- blog.title %></h2>
+        <% if(blog.imageUrl!=""){ %>
+        <img height="400px" width="500px" src="http://localhost:3000/<%- blog.imageUrl %>" alt="BLOG IMAGE">
+       <% } %>
         <h4 class="card-subtitle">Subtitle: <%- blog.subtitle %></h4>
         <p class="card-description">Description: <%- blog.description %></p>
         <p>Published on : <%- blog.createdAt.toISOString().slice(0,10) %></p>

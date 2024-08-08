@@ -8,6 +8,12 @@ exports.renderCreateBlog = (req,res)=>{
 
 exports.handleCreateBlog = async(req,res)=>{
     const {title,subtitle,description} = req.body
+    let image
+    if(req.file){
+        image =req.file.filename
+    }else{
+        image = ""
+    }
     const userId = req.userId
     if(!title || !description || !subtitle){
         req.flash('error','please fil all field')
@@ -17,6 +23,7 @@ exports.handleCreateBlog = async(req,res)=>{
         title,
         subtitle,
         description,
+        imageUrl: image,
         userId
     })
     console.log("userId",userId)

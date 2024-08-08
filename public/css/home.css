@@ -47,7 +47,7 @@ nav ul li a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     min-width: 400px;
-    margin-bottom: 20px; /* Add some margin to separate rows */
+    margin-bottom: 30px; /* Add some margin to separate rows */
     cursor: pointer;
 }
 
@@ -84,8 +84,4 @@ nav ul li a {
     margin: 5px;
     padding: 7px;
 }
-footer{
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-}
+
